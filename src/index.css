@@ -4,6 +4,7 @@
 
 * {
   box-sizing: border-box;
+  @apply font-sans tracking-wide;
 }
 
 :root {
