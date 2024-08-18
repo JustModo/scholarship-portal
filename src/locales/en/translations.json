@@ -1,0 +1,8 @@
+{
+  "navbar": {
+    "home": "HOME",
+    "about": "ABOUT",
+    "login": "LOGIN",
+    "help": "HELP"
+  }
+}
