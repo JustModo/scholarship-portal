@@ -20,7 +20,7 @@ export default function QuickAccessBar() {
         >
           <option value="en">English</option>
           <option value="hi">हिंदी</option>
-          <option value="kn">ಕನ್ನಡ</option>
+          {/* <option value="kn">ಕನ್ನಡ</option> */}
         </select>
       </div>
     </div>

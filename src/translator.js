@@ -1,4 +1,4 @@
-import { useContext, useEffect, useMemo, useState } from "react";
+import { useContext, useMemo } from "react";
 import { GlobalStateContext } from "./context/GlobalContext";
 import ENtranslation from "./locales/en/translations.json";
 import HItranslation from "./locales/hi/translations.json";
@@ -11,24 +11,24 @@ function useTranslator(prefix = "") {
     () => ({
       en: ENtranslation,
       hi: HItranslation,
-      kn: KNtranslation,
+      // kn: KNtranslation,
     }),
     []
   );
 
-  const [translation, setTranslation] = useState(resources[language]);
-
-  useEffect(() => {
-    setTranslation(resources[language]);
-  }, [language, resources]);
-
   const t = (text) => {
+    const translation = resources[language];
     if (!translation) return text;
-    if (prefix) return translation[prefix]?.[text] || text;
+    if (prefix)
+      return (
+        prefix.split(".").reduce((acc, part) => {
+          return acc[part];
+        }, translation)[text] || text
+      );
     return translation[text] || text;
   };
 
-  return { t };
+  return t;
 }
 
 export default useTranslator;

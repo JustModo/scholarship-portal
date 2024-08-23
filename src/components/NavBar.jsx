@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 import useTranslator from "../translator";
 
 export default function NavBar() {
-  const { t } = useTranslator("navbar");
+  const t = useTranslator("navbar");
 
   return (
     <div
-      className="w-full h-14 flex flex-row px-2 shadow-lg justify-end"
+      className="w-full h-14 flex flex-row px-2 shadow-md justify-end select-none"
       id="navbar"
     >
       <div className="flex flex-row px-2 gap-5 h-full items-center justify-around sm:w-3/6 whitespace-nowrap text-sm sm:text-base">

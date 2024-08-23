@@ -4,7 +4,7 @@ export const GlobalStateContext = createContext();
 export const GlobalDispatchContext = createContext();
 
 const initialState = {
-  user: null,
+  user: localStorage.getItem("USER") || null,
   language: "en",
 };
 

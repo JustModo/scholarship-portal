@@ -1,7 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import { GlobalDispatchContext } from "../../../context/GlobalContext";
+import { handleLogin } from "../../../utils/utilities";
 
 export default function Login() {
+  const dispatch = useContext(GlobalDispatchContext);
+
   const [payload, setPayload] = useState({
     email: "",
     password: "",
@@ -17,8 +21,9 @@ export default function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(payload);
+    dispatch(handleLogin(payload));
   };
+
   return (
     <div className="flex justify-center items-center h-full font-sans flex-col">
       <form className="flex gap-2 w-72 flex-col" onSubmit={handleSubmit}>
