@@ -1,17 +1,74 @@
-export function getAuth() {
-  console.log("here");
-  const user = localStorage.getItem("USER");
-  return {
-    type: "SET_USER",
-    payload: user ? user : null,
-  };
-}
+import {
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { auth } from "../firebase";
+import { useModal } from "../context/ModalContext";
+import { useNavigate } from "react-router-dom";
+import { GlobalDispatchContext } from "../context/GlobalContext";
+import { useContext } from "react";
 
-export function handleLogin(data) {
-  console.log("here");
-  localStorage.setItem("USER", data.email);
+export const useUtils = () => {
+  const { openModal } = useModal();
+  const navigate = useNavigate();
+  const dispatch = useContext(GlobalDispatchContext);
+
+  function getAuth() {
+    console.log("here");
+    const user = JSON.parse(localStorage.getItem("USER"));
+    return {
+      type: "SET_USER",
+      payload: user ? user : null,
+    };
+  }
+
+  async function handleLogin(data) {
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        data.email,
+        data.password
+      );
+      const user = userCredential.user;
+      if (user.emailVerified) {
+        openModal("Logged in!");
+        localStorage.setItem("USER", JSON.stringify(user));
+        dispatch({ user });
+        navigate("/Dashboard");
+      } else {
+        openModal("Confirm Your Email!");
+        dispatch({ user: null });
+      }
+    } catch (error) {
+      openModal(error.message);
+      return {
+        type: "SET_USER",
+        payload: null,
+      };
+    }
+  }
+
+  async function handleRegister(data) {
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        data.email,
+        data.password
+      );
+      const user = userCredential.user;
+      await sendEmailVerification(user);
+      openModal("Verification email sent. Please check your inbox.");
+      navigate("/Auth/Login");
+    } catch (error) {
+      openModal(error.message);
+      console.log(error.message);
+    }
+  }
+
   return {
-    type: "SET_USER",
-    payload: data.email,
+    getAuth,
+    handleLogin,
+    handleRegister,
   };
-}
+};

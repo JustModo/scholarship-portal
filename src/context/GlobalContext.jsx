@@ -8,15 +8,16 @@ const initialState = {
   language: "en",
 };
 
-function globalReducer(state, action) {
-  switch (action.type) {
-    case "SET_USER":
-      return { ...state, user: action.payload };
-    case "SET_LANGUAGE":
-      return { ...state, language: action.payload };
-    default:
-      return state;
-  }
+function globalReducer(state, payload) {
+  const newState = { ...state };
+
+  Object.keys(payload).forEach((key) => {
+    if (key in state) {
+      newState[key] = payload[key];
+    }
+  });
+
+  return newState;
 }
 
 export const GlobalStateProvider = ({ children }) => {

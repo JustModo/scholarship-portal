@@ -14,9 +14,7 @@ export default function QuickAccessBar() {
           id="languages"
           className="border-slate-400 bg-white px-1"
           style={{ borderWidth: "1px", padding: "0.1rem" }}
-          onChange={(e) =>
-            dispatch({ type: "SET_LANGUAGE", payload: e.target.value })
-          }
+          onChange={(e) => dispatch({ language: e.target.value })}
         >
           <option value="en">English</option>
           <option value="hi">हिंदी</option>

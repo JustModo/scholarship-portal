@@ -1,10 +1,9 @@
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import { GlobalDispatchContext } from "../../../context/GlobalContext";
-import { handleLogin } from "../../../utils/utilities";
+import { useUtils } from "../../../utils/utilities";
 
 export default function Login() {
-  const dispatch = useContext(GlobalDispatchContext);
+  const { handleLogin } = useUtils();
 
   const [payload, setPayload] = useState({
     email: "",
@@ -21,7 +20,7 @@ export default function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(handleLogin(payload));
+    handleLogin(payload);
   };
 
   return (

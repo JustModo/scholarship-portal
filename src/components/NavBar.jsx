@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import useTranslator from "../translator";
+import { GlobalStateContext } from "../context/GlobalContext";
 
 export default function NavBar() {
   const t = useTranslator("navbar");
+  const { user } = useContext(GlobalStateContext);
 
   return (
     <div
@@ -20,14 +22,25 @@ export default function NavBar() {
         <Link to={"/Help"}>
           <div>{t("help")}</div>
         </Link>
-        <Link to={"/Auth/Login"}>
-          <div
-            className="bg-accent p-2 px-6 text-white"
-            style={{ lineHeight: "1" }}
-          >
-            {t("login")}
-          </div>
-        </Link>
+        {!user ? (
+          <Link to={"/Auth/Login"}>
+            <div
+              className="bg-accent p-2 px-6 text-white"
+              style={{ lineHeight: "1" }}
+            >
+              {t("login")}
+            </div>
+          </Link>
+        ) : (
+          <Link to={"/Dashboard"}>
+            <div
+              className="bg-accent p-2 px-6 text-white"
+              style={{ lineHeight: "1" }}
+            >
+              Dashboard
+            </div>
+          </Link>
+        )}
       </div>
     </div>
   );

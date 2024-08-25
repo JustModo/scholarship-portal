@@ -21,6 +21,17 @@ export default function Verification() {
 }
 
 function FileInput({ title }) {
+   const handleImageChange = (event) => {
+    const file = event.target.files[0];
+
+    if (file) {
+      const url = URL.createObjectURL(file);
+
+      window.open(url, '_blank');
+
+      setTimeout(() => URL.revokeObjectURL(url), 60000);
+    }
+  };
   return (
     <div className="flex flex-col gap-2">
       <label className="font-semibold">
@@ -33,6 +44,7 @@ function FileInput({ title }) {
         name="imageUpload"
         accept="image/*"
         className="block w-auto max-w-60 text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:border-0 file:text-sm file:font-semibold file:bg-accent file:text-white hover:file:bg-orange-400"
+        // onChange={handleImageChange}
       />
     </div>
   );
