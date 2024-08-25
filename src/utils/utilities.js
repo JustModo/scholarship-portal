@@ -16,11 +16,6 @@ export const useUtils = () => {
 
   function getAuth() {
     console.log("here");
-    const user = JSON.parse(localStorage.getItem("USER"));
-    return {
-      type: "SET_USER",
-      payload: user ? user : null,
-    };
   }
 
   async function handleLogin(data) {
@@ -33,9 +28,8 @@ export const useUtils = () => {
       const user = userCredential.user;
       if (user.emailVerified) {
         openModal("Logged in!");
-        localStorage.setItem("USER", JSON.stringify(user));
         dispatch({ user });
-        navigate("/Dashboard");
+        // navigate("/Dashboard");
       } else {
         openModal("Confirm Your Email!");
         dispatch({ user: null });
@@ -59,7 +53,7 @@ export const useUtils = () => {
       const user = userCredential.user;
       await sendEmailVerification(user);
       openModal("Verification email sent. Please check your inbox.");
-      navigate("/Auth/Login");
+      // navigate("/Auth/Login");
     } catch (error) {
       openModal(error.message);
       console.log(error.message);
