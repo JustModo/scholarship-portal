@@ -1,5 +1,5 @@
 import { onAuthStateChanged } from "firebase/auth";
-import React, { createContext, useEffect, useReducer } from "react";
+import React, { createContext, useContext, useEffect, useReducer } from "react";
 import { auth } from "../firebase";
 
 export const GlobalStateContext = createContext();
@@ -46,3 +46,6 @@ export const GlobalStateProvider = ({ children }) => {
     </GlobalStateContext.Provider>
   );
 };
+
+export const useGlobalState = () => useContext(GlobalStateContext);
+export const useGlobalDispatch = () => useContext(GlobalDispatchContext);

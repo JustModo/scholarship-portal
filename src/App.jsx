@@ -14,15 +14,15 @@ import Allotment from "./pages/Dashboard/Allotment/Allotment";
 import Payment from "./pages/Dashboard/Payment/Payment";
 import { useContext } from "react";
 import { GlobalStateContext } from "./context/GlobalContext";
-import Spinner from "./components/Spinner/Spinner";
-import NotFound from "./pages/NotFound/NotFOund";
+import NotFound from "./pages/NotFound/NotFound";
+import LoadingSpinner from "./components/LoadingSpinner/LoadingSpinner";
 
 function App() {
   const { user, loading } = useContext(GlobalStateContext);
   if (loading)
     return (
       <div className="w-full h-screen flex items-center justify-center">
-        <Spinner />
+        <LoadingSpinner />
       </div>
     );
 

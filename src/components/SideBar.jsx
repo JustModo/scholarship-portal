@@ -17,9 +17,9 @@ export default function SideBar() {
               >
                 Verification
               </Link>
-              <label className="text-xs text-zinc-400">Deadline: 12-7-24</label>
+              {/* <label className="text-xs text-zinc-400">Deadline: 12-7-24</label> */}
             </li>
-            <li className="flex flex-col cursor-pointer">
+            {/* <li className="flex flex-col cursor-pointer">
               <Link to={"Allotment"} onClick={() => setIsVisible(!isVisible)}>
                 Allotment
               </Link>
@@ -30,7 +30,7 @@ export default function SideBar() {
                 Payment
               </Link>
               <label className="text-xs text-zinc-400">Deadline: 12-7-24</label>
-            </li>
+            </li> */}
           </ul>
         </div>
       )}

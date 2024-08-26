@@ -3,6 +3,7 @@
     "home": "HOME",
     "about": "ABOUT",
     "login": "LOGIN",
-    "help": "HELP"
+    "help": "HELP",
+    "dashboard": "DASHBAORD"
   }
 }

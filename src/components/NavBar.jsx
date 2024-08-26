@@ -37,7 +37,7 @@ export default function NavBar() {
               className="bg-accent p-2 px-6 text-white"
               style={{ lineHeight: "1" }}
             >
-              Dashboard
+              {t("dashboard")}
             </div>
           </Link>
         )}
